@@ -1,0 +1,28 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.1.RELEASE'
+        springVersion = '4.3.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+    runtime('com.h2database:h2')
+    compile('jim:no-boot-app:1.0.0')
+}
+
+
