@@ -4,12 +4,9 @@ import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.mock.jndi.SimpleNamingContextBuilder;
 
 import javax.naming.NamingException;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class App {
 
@@ -31,10 +28,9 @@ public class App {
 
         JdbcTemplate jdbc = ctx.getBean(JdbcTemplate.class);
 
-        jdbc.query("SELECT name FROM userz", new RowCallbackHandler() {
-            @Override public void processRow(ResultSet rs) throws SQLException {
+        jdbc.query("SELECT name FROM userz", (rs) -> {
                 System.out.println("Returned " + rs.getString("name"));
             }
-        });
+        );
     }
 }
